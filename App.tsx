@@ -1,19 +1,17 @@
 import React, {useEffect} from 'react'
 import {StyleSheet, Text, View, ImageBackground, Image} from 'react-native';
-import Character from './components/Character'
 
 export default function App() {
-    
-    
     return (
 
         <ImageBackground
             source={require('./assets/background.png')}
             style={styles.backgroundImage}>
-            <Character/>
+            <Image
+                source={require('../assets/character.png')}
+                style={styles.character}
+            ></Image>
         </ImageBackground>
-        
-    
     );
 }
 
