@@ -1,18 +1,16 @@
 import React, {useEffect, useRef, useState} from 'react'
 import {
-    StyleSheet,
-    Text,
     View,
-    ImageBackground,
-    Image,
     Dimensions,
     TouchableWithoutFeedback,
 } from 'react-native';
-export default function App() {
-    const backgroundImage = require('./assets/background.png');
+import {styles} from "./styles";
+import {Character} from "./components/Character";
+import {GameBackground} from "./components/GameBackground";
 
+export default function App() 
+{
     const [characterPosition, setCharacterPosition] =  useState(0);
-    
     const onButtonPressRef = useRef(null);
     
     useEffect(() => 
@@ -53,6 +51,7 @@ export default function App() {
             {
                 reset();
             }
+            
         }, 30)
         
         return () => clearInterval(interval);
@@ -64,38 +63,13 @@ export default function App() {
         <TouchableWithoutFeedback
         style={styles.touchBackground}
         onPress={onButtonPressRef.current}>
-            <ImageBackground
-                source={backgroundImage}
-                style={styles.backgroundImage}>
+            <GameBackground>
                 <View pointerEvents={'none'}>
-                    <Image
-                        source={require('./assets/character.png')}
-                        style={[styles.character, {top: characterPosition}]}
-                    ></Image>
+                    <Character 
+                        position={characterPosition} 
+                    />
                 </View>
-            </ImageBackground>
+            </GameBackground>
         </TouchableWithoutFeedback>
-            
     );
 }
-
-const styles = StyleSheet.create(
-{
-    backgroundImage: {
-        flex: 1,
-        resizeMode: "cover",
-        alignContent: "center",
-        justifyContent: "center"
-    },
-    character: {
-        width: 100,
-        height: 100,
-        alignSelf: "center"
-    },
-    touchBackground: {
-        flex: 1,
-        resizeMode: "cover",
-        alignContent: "center",
-        justifyContent: "center",
-    },
-});
